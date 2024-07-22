@@ -4,6 +4,11 @@ const Todo = () => {
   const [todoInput, setTodoInput] = useState("");
   const [todoList, setTodoList] = useState([]);
   console.log(todoList);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTodoList([...todoList, todoInput]);
+    setTodoInput("");
+  };
   return (
     <div>
       <div>
@@ -13,9 +18,15 @@ const Todo = () => {
           value={todoInput}
           onChange={(e) => setTodoInput(e.target.value)}
         />
-        <button onClick={() => setTodoList([todoInput, ...todoList])}>
-          Submit
-        </button>
+        <button onClick={handleSubmit}>Submit</button>
+
+        <div>
+          {todoList.map((e, key) => (
+            <ol>
+              <li key={key}>{e}</li>
+            </ol>
+          ))}
+        </div>
       </div>
     </div>
   );
